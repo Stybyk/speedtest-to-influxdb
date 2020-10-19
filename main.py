@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 import time
 import json
 import subprocess
@@ -5,14 +6,18 @@ import subprocess
 from influxdb import InfluxDBClient
 
 # InfluxDB Settings
-DB_ADDRESS = 'db_hostname.network'
+DB_ADDRESS = '10.10.10.10'
 DB_PORT = 8086
-DB_USER = 'db_username'
-DB_PASSWORD = 'db_password'
+DB_USER = 'user'
+DB_PASSWORD = 'password'
 DB_DATABASE = 'speedtest_db'
 
+ # Modify hostname to identify source of the data as you need
+
+HOST_SRC = 'hostname'
+
 # Speedtest Settings
-TEST_INTERVAL = 1800  # Time between tests (in seconds).
+TEST_INTERVAL = 360  # Time between tests (in seconds).
 TEST_FAIL_INTERVAL = 60  # Time before retrying a failed Speedtest (in seconds).
 
 influxdb_client = InfluxDBClient(
@@ -39,7 +44,12 @@ def format_for_influx(cliout):
             'fields': {
                 'jitter': data['ping']['jitter'],
                 'latency': data['ping']['latency']
-            }
+            },
+            'tags':{
+                'host':HOST_SRC
+
+           }
+            
         },
         {
             'measurement': 'download',
@@ -49,7 +59,11 @@ def format_for_influx(cliout):
                 'bandwidth': data['download']['bandwidth'] / 125000,
                 'bytes': data['download']['bytes'],
                 'elapsed': data['download']['elapsed']
-            }
+            },
+            'tags':{
+                'host':HOST_SRC
+
+           }
         },
         {
             'measurement': 'upload',
@@ -59,14 +73,22 @@ def format_for_influx(cliout):
                 'bandwidth': data['upload']['bandwidth'] / 125000,
                 'bytes': data['upload']['bytes'],
                 'elapsed': data['upload']['elapsed']
-            }
+            },
+            'tags':{
+                'host':HOST_SRC
+
+           }
         },
         {
             'measurement': 'packetLoss',
             'time': data['timestamp'],
             'fields': {
-                'packetLoss': data['packetLoss']
-            }
+                'packetLoss': data['packetLoss'] + 0.0001,  # Preventing influxdb crate packetloss as integer eg. 0.0% packetLoss = always 0 int 
+            },
+            'tags':{
+                'host':HOST_SRC
+
+           }
         }
     ]
 
