@@ -26,13 +26,5 @@ Be aware that this script will automatically accept the license and GDPR stateme
 
     `python3 ./main.py`
 
-### 2. Run with Docker or Podman
 
-1. Build the container.
-
-    `docker build -t aidengilmartin/speedtest-influx ./`
-
-2. Run the container.
-
-    `docker run -d --name speedtest-influx aidengilmartin/speedtest-influx`
 
