@@ -11,7 +11,6 @@ DB_PORT = 8086
 DB_USER = 'db_username'
 DB_PASSWORD = 'db_password'
 DB_DATABASE = 'speedtest_db'
-DB_RETRY_INVERVAL = 60 # Time before retrying a failed data upload.
 HOST_SRC = 'hostname'
 
 # Speedtest Settings
