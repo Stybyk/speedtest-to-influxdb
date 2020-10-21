@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 import time
 import json
 import subprocess
@@ -16,6 +17,7 @@ HOST_SRC = 'hostname'
 # Speedtest Settings
 TEST_INTERVAL = 1800  # Time between tests (in seconds).
 TEST_FAIL_INTERVAL = 60  # Time before retrying a failed Speedtest (in seconds).
+DB_RETRY_INVERVAL = 60 # Time before retrying a failed data upload.
 
 influxdb_client = InfluxDBClient(
     DB_ADDRESS, DB_PORT, DB_USER, DB_PASSWORD, None)
