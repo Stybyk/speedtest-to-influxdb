@@ -21,6 +21,7 @@ Be aware that this script will automatically accept the license and GDPR stateme
 2. Install the InfluxDB client for library from Python.
 
     `pip install influxdb`
+    or python3 -m pip install influxdb
 
 3. Run the script.
 
