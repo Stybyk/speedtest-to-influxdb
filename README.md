@@ -20,12 +20,17 @@ Be aware that this script will automatically accept the license and GDPR stateme
 
 2. Install the InfluxDB client for library from Python.
 
-    `pip install influxdb`
-    or python3 -m pip install influxdb
+    `pip install influxdb`  
+                or
+    `python3 -m pip install influxdb`
 
 3. Run the script.
 
     `python3 ./main.py`
 
 
+///Usefull debug commands: 
 
+`speedtest --accept-license --accept-gdpr -f json`   -- show json speedtest output
+
+`sudo pip uninstall speedtest-cli` -- uninstall sivel´s speedtest sometimes installed by default in rpi-os
